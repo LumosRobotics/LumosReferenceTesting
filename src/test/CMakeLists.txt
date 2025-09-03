@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
+option(GENERATE_TEST_DATA "Generate test data" OFF)
+
+# if(GENERATE_TEST_DATA)
+#     target_compile_definitions(my_tests PRIVATE GENERATE_TEST_DATA=1)
+# else()
+#     target_compile_definitions(my_tests PRIVATE GENERATE_TEST_DATA=0)
+# endif()
+
 # Original comprehensive test
 set(CPP_SOURCE_FILES test.cpp)
 add_executable(test_runner ${CPP_SOURCE_FILES})

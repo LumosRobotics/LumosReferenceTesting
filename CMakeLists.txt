@@ -25,6 +25,9 @@ set(GTEST_LIB_FILES libgtest.a
 # Nlohmann
 include_directories(${CMAKE_SOURCE_DIR}/third_party/nlohmann/include)
 
+# Duoplot
+include_directories(${CMAKE_SOURCE_DIR}/third_party/dvs/src/interfaces/cpp)
+
 add_compile_options(-Wall -Wextra -pedantic)
 
 # Enable testing

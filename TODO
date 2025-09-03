@@ -2,6 +2,7 @@
  * Is try at least once
  * Is within bounds at least once
  * Is equal to enum at least once
+ * all(), any()
  * Some condition is true for at least a number of samples
  * Some condition is true for at least a connected number of samples
  * Is above value for at least certain time
@@ -14,3 +15,4 @@
  * 3D trajectories
  * Checking variance
  * Difference between mean of reference and mean of test trajectories
+ * Through command line arguments (runtime) to the test executable, generate new reference data, or plot scenario

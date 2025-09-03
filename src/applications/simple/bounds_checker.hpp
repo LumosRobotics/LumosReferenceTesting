@@ -7,6 +7,8 @@
 #include <cmath>
 #include <functional>
 
+#include <duoplot/duoplot.h>
+
 template <typename T>
 T linearInterpolate(T x, T x0, T y0, T x1, T y1)
 {
@@ -331,63 +333,65 @@ bool isWithin2DCorridor(
 {
   static_assert(std::is_same_v<T, float> || std::is_same_v<T, double>,
                 "isWithin2DCorridor only supports float and double types");
-  
+
   if (x_test.size() != y_test.size())
   {
     throw std::invalid_argument("Test vectors must have the same size");
   }
-  
+
   if (x_left.size() != y_left.size() || x_right.size() != y_right.size())
   {
     throw std::invalid_argument("Boundary vectors must have consistent sizes");
   }
-  
+
   if (x_left.size() < 2 || x_right.size() < 2)
   {
     throw std::invalid_argument("Boundary vectors must have at least 2 points");
   }
-  
+
   // Helper function to check if point is on the left side of a line segment
-  auto isPointOnLeftSide = [](T px, T py, T x1, T y1, T x2, T y2) -> bool {
+  auto isPointOnLeftSide = [](T px, T py, T x1, T y1, T x2, T y2) -> bool
+  {
     return ((x2 - x1) * (py - y1) - (y2 - y1) * (px - x1)) >= 0;
   };
-  
+
   for (size_t i = 0; i < x_test.size(); ++i)
   {
     T test_x = x_test[i];
     T test_y = y_test[i];
     bool inside_corridor = true;
-    
+
     // Check if point is inside the corridor by verifying it's on the correct side
     // of all left boundary segments and correct side of all right boundary segments
-    
+
     // Check left boundary - point should be on the right side of left boundary
     for (size_t j = 0; j < x_left.size() - 1; ++j)
     {
-      if (isPointOnLeftSide(test_x, test_y, x_left[j], y_left[j], x_left[j+1], y_left[j+1]))
+      if (isPointOnLeftSide(test_x, test_y, x_left[j], y_left[j], x_left[j + 1], y_left[j + 1]))
       {
         inside_corridor = false;
         break;
       }
     }
-    
-    if (!inside_corridor) continue;
-    
+
+    if (!inside_corridor)
+      continue;
+
     // Check right boundary - point should be on the left side of right boundary
     for (size_t j = 0; j < x_right.size() - 1; ++j)
     {
-      if (!isPointOnLeftSide(test_x, test_y, x_right[j], y_right[j], x_right[j+1], y_right[j+1]))
+      if (!isPointOnLeftSide(test_x, test_y, x_right[j], y_right[j], x_right[j + 1], y_right[j + 1]))
       {
         inside_corridor = false;
         break;
       }
     }
-    
+
     if (!inside_corridor)
     {
       return false;
     }
   }
-  
+
   return true;
 }
