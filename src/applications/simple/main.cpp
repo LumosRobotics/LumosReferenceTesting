@@ -4,8 +4,9 @@
 #include <cmath>
 #include <utility>
 // #include <nlohmann/json.hpp>
-#include "bounds_checker.hpp"
-#include "binary_serializer.hpp"
+#include "reference_testing/reference_testing.h"
+
+using namespace lumos;
 
 bool ReferenceDataShouldGenerate()
 {

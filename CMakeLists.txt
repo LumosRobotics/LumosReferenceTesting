@@ -28,6 +28,10 @@ include_directories(${CMAKE_SOURCE_DIR}/third_party/nlohmann/include)
 # Duoplot
 include_directories(${CMAKE_SOURCE_DIR}/third_party/dvs/src/interfaces/cpp)
 
+include_directories(${CMAKE_SOURCE_DIR}/src/)
+
+
+
 add_compile_options(-Wall -Wextra -pedantic)
 
 # Enable testing
